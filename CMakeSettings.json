@@ -1,0 +1,73 @@
+﻿{
+  "environments": [
+    {
+      "environment": "KritaPaths",
+      "PATH": "C:\\llvm-mingw\\bin;C:\\krita-dev\\_install\\bin;C:\\krita-dev\\ext_install\\bin;${env.PATH}"
+    }
+  ],
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "ECM_DIR",
+          "value": "C:\\krita-dev\\_install\\share\\ECM\\cmake",
+          "type": "PATH"
+        },
+        {
+          "name": "CMAKE_PREFIX_PATH",
+          "value": "C:\\krita-dev\\_install",
+          "type": "PATH"
+        },
+        {
+          "name": "LibExiv2_LIBRARIES",
+          "value": "C:/krita-dev/_install/lib",
+          "type": "FILEPATH"
+        },
+        {
+          "name": "LCMS2_LIBRARY",
+          "value": "C:/krita-dev/_install/lib",
+          "type": "FILEPATH"
+        },
+        {
+          "name": "FREETYPE_LIBRARY",
+          "value": "C:/krita-dev/_install/lib",
+          "type": "PATH"
+        },
+        {
+          "name": "HarfBuzz_LIBRARY",
+          "value": "C:/krita-dev/_install/lib",
+          "type": "PATH"
+        },
+        {
+          "name": "Fontconfig_LIBRARY",
+          "value": "C:/krita-dev/_install/lib",
+          "type": "PATH"
+        },
+        {
+          "name": "FriBidi_LIBRARY",
+          "value": "C:/krita-dev/_install/lib",
+          "type": "PATH"
+        },
+        {
+          "name": "KRITA_DEVS",
+          "value": "ON",
+          "type": "BOOL"
+        },
+        {
+          "name": "HIDE_SAFE_ASSERTS",
+          "value": "OFF",
+          "type": "BOOL"
+        }
+      ]
+    }
+  ]
+}
