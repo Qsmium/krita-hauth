@@ -206,11 +206,12 @@ void KisToolFreehand::endStroke()
 
         //Construct HAuthAction
         HAuthAction strokeAction = HAuthAction();
-        strokeAction.strokePoints = m_strokeGlobalPoints;
+        strokeAction.strokePoints = std::move(m_strokeGlobalPoints);
 
         KisDocument *document = kisCanvas->imageView()->document();
         document->recordHAuthAction(strokeAction);
     }
+
     m_strokeGlobalPoints.clear();
 }
 

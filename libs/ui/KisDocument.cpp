@@ -1297,6 +1297,7 @@ void KisDocument::copyFromDocumentImpl(const KisDocument &rhs, CopyPolicy policy
             // clone the image with keeping the GUIDs of the layers intact
             // NOTE: we expect the image to be locked!
             setCurrentImage(rhs.image()->clone(/* exactCopy = */ true), /* forceInitialUpdate = */ false);
+            d->actionLog = rhs.d->actionLog;
         }
     }
 
