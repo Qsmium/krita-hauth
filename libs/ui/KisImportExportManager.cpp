@@ -838,7 +838,10 @@ KisImportExportErrorCode KisImportExportManager::doExportImpl(const QString &loc
         return result;
     }
 
-    exportConfiguration->setProperty("filepath", location);
+    if (exportConfiguration) 
+    {
+        exportConfiguration->setProperty("filepath", location);
+    }
     KisImportExportErrorCode status = filter->convert(m_document, &file, exportConfiguration);
 
     if (filter->supportsIO()) {
