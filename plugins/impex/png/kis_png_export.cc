@@ -107,7 +107,7 @@ KisImportExportErrorCode KisPNGExport::convert(KisDocument *document, QIODevice 
                 QList<HAuthAction> actionLog = document->getHAuthActionLog();
                 out << "Start File:" << "\n";
                 for (HAuthAction &action : actionLog) {
-                    out << action.toString() + "d" << "\n";
+                    out << action.toString() << "\n";
                 }
 
                 sidecarFile.close();

@@ -127,7 +127,9 @@ private:
 
     std::optional<KoPointerEventWrapper> m_beginAlternateActionEvent;
     
-    QList<QPoint> m_strokeGlobalPoints;
+    QList<QVector2D> m_strokeGlobalPoints;
+
+    QList<QVector2D> m_strokeGlobalPointsCanvasspace;
 };
 
 

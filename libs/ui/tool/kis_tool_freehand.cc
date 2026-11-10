@@ -184,14 +184,32 @@ void KisToolFreehand::initStroke(KoPointerEvent *event)
                         image(),
                         currentNode(),
                         image().data());
+
+    //Global Points
+
     m_strokeGlobalPoints.clear();
-    m_strokeGlobalPoints.append(event->globalPos());
+    m_strokeGlobalPoints.append(
+        QVector2D(static_cast<float>(event->globalPos().x()) / canvas()->canvasWidget()->screen()->geometry().width(),
+        static_cast<float>(event->globalPos().y()) / canvas()->canvasWidget()->screen()->geometry().height()));
+
+    //Get the actual 0-1 coordinates of where the brushstroke was in the image
+    m_strokeGlobalPointsCanvasspace.clear();
+    QPointF docPos = event->point;
+    QVector2D screenspaceCoords = QVector2D(docPos.x() / image()->width() * 10.0, docPos.y() / image()->height() * 10.0);
+    m_strokeGlobalPointsCanvasspace.append(screenspaceCoords);
 }
 
 void KisToolFreehand::doStroke(KoPointerEvent *event)
 {
     m_helper->paintEvent(event);
-    m_strokeGlobalPoints.append(event->globalPos());
+
+    //Get HAuth strokes
+    m_strokeGlobalPoints.append(QVector2D(static_cast<float>(event->globalPos().x()) / canvas()->canvasWidget()->screen()->geometry().width(),
+        static_cast<float>(event->globalPos().y()) / canvas()->canvasWidget()->screen()->geometry().height()));
+
+    QPointF docPos = event->point;
+    QVector2D screenspaceCoords = QVector2D(docPos.x() / image()->width(), docPos.y() / image()->height());
+    m_strokeGlobalPointsCanvasspace.append(screenspaceCoords);
 }
 
 void KisToolFreehand::endStroke()
@@ -207,6 +225,10 @@ void KisToolFreehand::endStroke()
         //Construct HAuthAction
         HAuthAction strokeAction = HAuthAction();
         strokeAction.strokePoints = std::move(m_strokeGlobalPoints);
+        strokeAction.strokePointsCanvasspace = std::move(m_strokeGlobalPointsCanvasspace);
+
+        //Save HAuth system time
+        strokeAction.strokeEndTimestamp = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
         KisDocument *document = kisCanvas->imageView()->document();
         document->recordHAuthAction(strokeAction);
