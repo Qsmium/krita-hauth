@@ -364,6 +364,40 @@ bool KisKraSaver::saveAudio(KoStore *store)
     return true;
 }
 
+bool KisKraSaver::saveHAuth(KoStore *store)
+{
+    if (m_d->doc->getHAuthActionLog().count() <= 0)
+        return true;
+
+    if (!store->open(m_d->imageName + "hauthlog.hauthb")) {
+        m_d->errorMessages << i18nc("Error message when saving a .kra file", "Could not save hauth log meta data.");
+        return false;
+    }
+
+    //Create HAuth byteArray
+    QByteArray byteArray = HAuthAction::HAuthListToByteArray((m_d->doc->getHAuthActionLog()));
+
+    bool success = true;
+    qint64 bytesWriteCount = 0;
+    if (!byteArray.isEmpty()) {
+        bytesWriteCount = store->write(byteArray);
+    } else {
+        qWarning() << "Could not save audio data to a byte array!";
+        success = false;
+    }
+
+    bool closeOK = store->close();
+
+    success = success && closeOK && (bytesWriteCount == byteArray.size());
+
+    if (!success) {
+        m_d->errorMessages << i18nc("Error message when saving a .kra file", "Could not save hauth meta data.");
+        return false;
+    }
+
+    return true;
+}
+
 void KisKraSaver::saveResourcesToXML(QDomDocument &doc, QDomElement &element)
 {
     QDomElement ePalette = doc.createElement(PALETTES);

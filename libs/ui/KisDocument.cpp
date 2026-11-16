@@ -459,6 +459,11 @@ QList<HAuthAction> KisDocument::getHAuthActionLog()
     return d->actionLog;
 }
 
+void KisDocument::setHauthActionLog(QList<HAuthAction> log)
+{
+    d->actionLog = log;
+}
+
 void KisDocument::Private::syncDecorationsWrapperLayerState()
 {
     if (!this->image || this->decorationsSyncingDisabled) return;

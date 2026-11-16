@@ -49,6 +49,7 @@ public:
     void loadStoryboards(KoStore *store, KisDocument *doc);
     void loadAnimationMetadata(KoStore *store, KisImageSP image);
     void loadAudio(KoStore *store, KisDocument *kisDoc);
+    void loadHauthLog(KoStore *store, KisDocument *kisDoc);
     Q_DECL_DEPRECATED void backCompat_loadAudio(const QDomElement &elem, KisDocument *document);
 
     vKisNodeSP selectedNodes() const;

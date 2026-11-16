@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+#include <HAuthAction.h>
 #ifndef _KRA_CONVERTER_H_
 #define _KRA_CONVERTER_H_
 
@@ -63,6 +64,7 @@ private:
     KisDocument *m_doc {0};
     KisImageSP m_image;
 
+    QList<HAuthAction> m_hauthLog;
     vKisNodeSP m_activeNodes;
     QList<KisPaintingAssistantSP> m_assistants;
     StoryboardItemList m_storyboardItemList;

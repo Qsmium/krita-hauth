@@ -669,6 +669,20 @@ void KisKraLoader::loadAudio(KoStore *store, KisDocument *kisDoc)
     }
 }
 
+void KisKraLoader::loadHauthLog(KoStore *store, KisDocument *kisDoc)
+{
+    if (!store->hasFile(m_d->imageName + "hauthlog.hauthb"))
+        return;
+
+    if (store->open(m_d->imageName + "hauthlog.hauthb")) {
+        QByteArray byteData = store->read(store->size());
+        QList<HAuthAction> hauthLog = HAuthAction::HAuthListFromByteArray(&byteData);
+        store->close();
+
+        kisDoc->setHauthActionLog(hauthLog);
+    }
+}
+
 void KisKraLoader::backCompat_loadAudio(const QDomElement& elem, KisDocument *document)
 {
     QDomDocument dom;

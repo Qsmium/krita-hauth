@@ -42,6 +42,8 @@ public:
 
     bool saveAudio(KoStore *store);
 
+    bool saveHAuth(KoStore *store);
+
     /// @return a list with everything that went wrong while saving
     QStringList errorMessages() const;
 

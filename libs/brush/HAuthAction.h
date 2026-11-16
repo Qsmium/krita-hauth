@@ -19,4 +19,7 @@ public:
     long long strokeEndTimestamp;
 
     QString toString();
+
+    static QByteArray HAuthListToByteArray(QList<HAuthAction> hauthList);
+    static QList<HAuthAction> HAuthListFromByteArray(QByteArray* byteArray);
 };

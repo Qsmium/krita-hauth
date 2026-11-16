@@ -433,6 +433,7 @@ public:
     void recordHAuthAction(HAuthAction action);
 
     QList<HAuthAction> getHAuthActionLog();
+    void setHauthActionLog(QList<HAuthAction> log);
 
     /**
      * @brief importExportManager gives access to the internal import/export manager
